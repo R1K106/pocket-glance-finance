@@ -89,30 +89,30 @@ export function FinanceApp() {
   const recentTransactions = transactions.slice(0, 5);
 
   return (
-    <div className="min-h-screen bg-background p-4 md:p-6">
-      <div className="max-w-6xl mx-auto space-y-6">
+    <div className="min-h-screen bg-gradient-to-br from-background to-muted/30 p-4 md:p-6">
+      <div className="max-w-6xl mx-auto space-y-6 animate-fade-in">
         {/* Header */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-primary rounded-lg">
-              <Wallet className="h-6 w-6 text-primary-foreground" />
+        <div className="flex items-center justify-between glass-effect p-6 rounded-2xl backdrop-blur-xl hover-lift">
+          <div className="flex items-center gap-4">
+            <div className="p-3 bg-gradient-to-br from-primary to-primary/80 rounded-2xl shadow-apple-md animate-bounce-gentle">
+              <Wallet className="h-7 w-7 text-primary-foreground" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-foreground">Pocket Finance</h1>
-              <p className="text-muted-foreground">Track your money, achieve your goals</p>
+              <h1 className="text-3xl font-bold text-foreground tracking-tight">Pocket Finance</h1>
+              <p className="text-muted-foreground text-lg">Track your money, achieve your goals</p>
             </div>
           </div>
 
           <Dialog open={isAddingTransaction} onOpenChange={setIsAddingTransaction}>
             <DialogTrigger asChild>
-              <Button className="gap-2">
-                <PlusCircle className="h-4 w-4" />
+              <Button className="gap-3 px-6 py-3 text-lg button-apple animate-scale-in hover-lift">
+                <PlusCircle className="h-5 w-5" />
                 Add Transaction
               </Button>
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="card-apple max-w-md animate-scale-in">
               <DialogHeader>
-                <DialogTitle>Add New Transaction</DialogTitle>
+                <DialogTitle className="text-2xl font-semibold">Add New Transaction</DialogTitle>
               </DialogHeader>
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
@@ -184,7 +184,7 @@ export function FinanceApp() {
                   />
                 </div>
 
-                <Button onClick={handleAddTransaction} className="w-full">
+                <Button onClick={handleAddTransaction} className="w-full button-apple py-3 text-lg font-medium">
                   Add Transaction
                 </Button>
               </div>
@@ -193,83 +193,100 @@ export function FinanceApp() {
         </div>
 
         {/* Overview Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <Card className="border-l-4 border-l-balance">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Current Balance</CardTitle>
-              <DollarSign className="h-4 w-4 text-balance" />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-slide-up">
+          <Card className="card-apple border-l-4 border-l-balance/50 overflow-hidden hover-lift">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+              <CardTitle className="text-base font-semibold text-muted-foreground">Current Balance</CardTitle>
+              <div className="p-2 bg-balance/10 rounded-xl">
+                <DollarSign className="h-5 w-5 text-balance" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className={`text-2xl font-bold ${balance >= 0 ? 'text-balance' : 'text-expense'}`}>
+              <div className={`text-3xl font-bold tracking-tight ${balance >= 0 ? 'text-balance' : 'text-expense'}`}>
                 ${balance.toFixed(2)}
               </div>
             </CardContent>
           </Card>
 
-          <Card className="border-l-4 border-l-income">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Income</CardTitle>
-              <TrendingUp className="h-4 w-4 text-income" />
+          <Card className="card-apple border-l-4 border-l-income/50 overflow-hidden hover-lift">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+              <CardTitle className="text-base font-semibold text-muted-foreground">Total Income</CardTitle>
+              <div className="p-2 bg-income/10 rounded-xl">
+                <TrendingUp className="h-5 w-5 text-income" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-income">${totalIncome.toFixed(2)}</div>
+              <div className="text-3xl font-bold text-income tracking-tight">${totalIncome.toFixed(2)}</div>
             </CardContent>
           </Card>
 
-          <Card className="border-l-4 border-l-expense">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Expenses</CardTitle>
-              <TrendingDown className="h-4 w-4 text-expense" />
+          <Card className="card-apple border-l-4 border-l-expense/50 overflow-hidden hover-lift">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+              <CardTitle className="text-base font-semibold text-muted-foreground">Total Expenses</CardTitle>
+              <div className="p-2 bg-expense/10 rounded-xl">
+                <TrendingDown className="h-5 w-5 text-expense" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-expense">${totalExpenses.toFixed(2)}</div>
+              <div className="text-3xl font-bold text-expense tracking-tight">${totalExpenses.toFixed(2)}</div>
             </CardContent>
           </Card>
         </div>
 
         {/* Main Content */}
-        <Tabs defaultValue="dashboard" className="space-y-4">
-          <TabsList>
-            <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
-            <TabsTrigger value="transactions">All Transactions</TabsTrigger>
+        <Tabs defaultValue="dashboard" className="space-y-6 animate-slide-up">
+          <TabsList className="glass-effect p-2 h-auto shadow-apple-sm">
+            <TabsTrigger value="dashboard" className="px-6 py-3 text-base font-medium rounded-xl transition-all duration-300 data-[state=active]:shadow-apple-sm">Dashboard</TabsTrigger>
+            <TabsTrigger value="transactions" className="px-6 py-3 text-base font-medium rounded-xl transition-all duration-300 data-[state=active]:shadow-apple-sm">All Transactions</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="dashboard" className="space-y-4">
-            <Card>
-              <CardHeader>
-                <CardTitle>Recent Transactions</CardTitle>
+          <TabsContent value="dashboard" className="space-y-6 animate-fade-in">
+            <Card className="card-apple overflow-hidden">
+              <CardHeader className="bg-gradient-to-r from-muted/50 to-muted/30 border-b">
+                <CardTitle className="text-xl font-semibold">Recent Transactions</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="p-6">
                 {recentTransactions.length === 0 ? (
-                  <div className="text-center py-8 text-muted-foreground">
-                    <Wallet className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                    <p>No transactions yet. Add your first transaction to get started!</p>
+                  <div className="text-center py-12 text-muted-foreground animate-fade-in">
+                    <div className="p-4 bg-muted/30 rounded-2xl w-fit mx-auto mb-6 animate-bounce-gentle">
+                      <Wallet className="h-16 w-16 mx-auto opacity-50" />
+                    </div>
+                    <p className="text-lg font-medium">No transactions yet</p>
+                    <p className="text-sm">Add your first transaction to get started!</p>
                   </div>
                 ) : (
-                  <div className="space-y-3">
-                    {recentTransactions.map((transaction) => (
-                      <div key={transaction.id} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
-                        <div className="flex items-center gap-3">
-                          <div className={`p-2 rounded-lg ${
-                            transaction.type === "income" ? "bg-income/10" : "bg-expense/10"
+                  <div className="space-y-4">
+                    {recentTransactions.map((transaction, index) => (
+                      <div 
+                        key={transaction.id} 
+                        className="flex items-center justify-between p-4 bg-gradient-to-r from-muted/30 to-muted/20 rounded-2xl border border-border/50 hover-lift transition-all duration-300"
+                        style={{ animationDelay: `${index * 0.1}s` }}
+                      >
+                        <div className="flex items-center gap-4">
+                          <div className={`p-3 rounded-2xl shadow-apple-sm ${
+                            transaction.type === "income" ? "bg-income/10 border border-income/20" : "bg-expense/10 border border-expense/20"
                           }`}>
                             {transaction.type === "income" ? (
-                              <TrendingUp className="h-4 w-4 text-income" />
+                              <TrendingUp className="h-5 w-5 text-income" />
                             ) : (
-                              <TrendingDown className="h-4 w-4 text-expense" />
+                              <TrendingDown className="h-5 w-5 text-expense" />
                             )}
                           </div>
                           <div>
-                            <p className="font-medium">{transaction.description || transaction.category}</p>
-                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                              <Tag className="h-3 w-3" />
-                              <span>{transaction.category}</span>
-                              <Calendar className="h-3 w-3 ml-2" />
-                              <span>{new Date(transaction.date).toLocaleDateString()}</span>
+                            <p className="font-semibold text-lg">{transaction.description || transaction.category}</p>
+                            <div className="flex items-center gap-3 text-sm text-muted-foreground mt-1">
+                              <div className="flex items-center gap-1">
+                                <Tag className="h-3 w-3" />
+                                <span>{transaction.category}</span>
+                              </div>
+                              <div className="flex items-center gap-1">
+                                <Calendar className="h-3 w-3" />
+                                <span>{new Date(transaction.date).toLocaleDateString()}</span>
+                              </div>
                             </div>
                           </div>
                         </div>
-                        <div className={`font-bold ${
+                        <div className={`text-xl font-bold tracking-tight ${
                           transaction.type === "income" ? "text-income" : "text-expense"
                         }`}>
                           {transaction.type === "income" ? "+" : "-"}${transaction.amount.toFixed(2)}
@@ -282,37 +299,43 @@ export function FinanceApp() {
             </Card>
           </TabsContent>
 
-          <TabsContent value="transactions">
-            <Card>
-              <CardHeader>
-                <CardTitle>All Transactions</CardTitle>
+          <TabsContent value="transactions" className="animate-fade-in">
+            <Card className="card-apple overflow-hidden">
+              <CardHeader className="bg-gradient-to-r from-muted/50 to-muted/30 border-b">
+                <CardTitle className="text-xl font-semibold">All Transactions</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="p-6">
                 {transactions.length === 0 ? (
-                  <div className="text-center py-8 text-muted-foreground">
-                    <Wallet className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                    <p>No transactions found.</p>
+                  <div className="text-center py-12 text-muted-foreground animate-fade-in">
+                    <div className="p-4 bg-muted/30 rounded-2xl w-fit mx-auto mb-6">
+                      <Wallet className="h-16 w-16 mx-auto opacity-50" />
+                    </div>
+                    <p className="text-lg font-medium">No transactions found</p>
                   </div>
                 ) : (
-                  <div className="space-y-3">
-                    {transactions.map((transaction) => (
-                      <div key={transaction.id} className="flex items-center justify-between p-4 border rounded-lg">
-                        <div className="flex items-center gap-4">
-                          <div className={`p-2 rounded-lg ${
-                            transaction.type === "income" ? "bg-income/10" : "bg-expense/10"
+                  <div className="space-y-4">
+                    {transactions.map((transaction, index) => (
+                      <div 
+                        key={transaction.id} 
+                        className="flex items-center justify-between p-5 bg-gradient-to-r from-card to-muted/20 rounded-2xl border border-border/50 hover-lift transition-all duration-300"
+                        style={{ animationDelay: `${index * 0.05}s` }}
+                      >
+                        <div className="flex items-center gap-5">
+                          <div className={`p-3 rounded-2xl shadow-apple-sm ${
+                            transaction.type === "income" ? "bg-income/10 border border-income/20" : "bg-expense/10 border border-expense/20"
                           }`}>
                             {transaction.type === "income" ? (
-                              <TrendingUp className="h-4 w-4 text-income" />
+                              <TrendingUp className="h-5 w-5 text-income" />
                             ) : (
-                              <TrendingDown className="h-4 w-4 text-expense" />
+                              <TrendingDown className="h-5 w-5 text-expense" />
                             )}
                           </div>
                           <div>
-                            <p className="font-medium">{transaction.description || transaction.category}</p>
-                            <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                            <p className="font-semibold text-lg">{transaction.description || transaction.category}</p>
+                            <div className="flex items-center gap-4 text-sm text-muted-foreground mt-2">
                               <div className="flex items-center gap-1">
                                 <Tag className="h-3 w-3" />
-                                <Badge variant="outline">{transaction.category}</Badge>
+                                <Badge variant="outline" className="rounded-lg">{transaction.category}</Badge>
                               </div>
                               <div className="flex items-center gap-1">
                                 <Calendar className="h-3 w-3" />
@@ -321,7 +344,7 @@ export function FinanceApp() {
                             </div>
                           </div>
                         </div>
-                        <div className={`text-lg font-bold ${
+                        <div className={`text-xl font-bold tracking-tight ${
                           transaction.type === "income" ? "text-income" : "text-expense"
                         }`}>
                           {transaction.type === "income" ? "+" : "-"}${transaction.amount.toFixed(2)}
